@@ -1,7 +1,7 @@
 {
-  "name": "Techscheme",
-  "author": "Loft Digital",
-  "main": "app/js/main.js",
+  "name": "Webpack4",
+  "author": "",
+  "main": "js/main.js",
   "license": "MIT",
   "scripts": {
     "dev": "webpack --mode development --watch",

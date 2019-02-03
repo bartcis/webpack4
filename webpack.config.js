@@ -1,26 +1,18 @@
-// =============================================================================
-//
-//  httpdocs/webpack.config.js
-//
-//  @copyright 2019, Loft Digital, www.weareloft.com
-//
-// =============================================================================
-
 require('babel-polyfill');
 require('whatwg-fetch');
 
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: [ 
     'babel-polyfill',
     'whatwg-fetch',
-    './app/js/main.js' 
+    './js/main.js' 
   ],
   output: {
-    path: path.resolve(__dirname, 'bundles'),
+    path: path.resolve(__dirname, ''),
     filename: 'main.bundle.js'
   },
   target: 'node',
@@ -30,14 +22,19 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.scss$/,
         use: [ 'style-loader', 
         MiniCssExtractPlugin.loader, 
-        'css-loader', 
+        {
+          loader: 'css-loader',
+          options: {
+            url: false,
+          },
+        },
         'postcss-loader',
         'sass-loader']
       }
@@ -46,7 +43,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin('dist', {} ),
     new MiniCssExtractPlugin({
-      filename: 'style.bundle.css',
+      filename: 'style.css',
     })
   ]
 };
